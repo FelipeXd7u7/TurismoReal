@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1> {{user.username | upper }} Realizará el Check In </h1>
+
+<div class="container login-form">
+    <form class="login mx-auto my-2" style="width: 25rem;" method="POST">
+        {% csrf_token %} {{ form.as_ul}}
+
+        <div class="text-center">
+            <button class="btn btn-success my-2">Ingresar</button>
+        </div>
+
+    </form>
+
+</div>
+    
+</body>
+</html>

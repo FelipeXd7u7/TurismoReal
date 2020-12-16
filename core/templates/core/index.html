@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Turismo Real</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Brands.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+
+<body>
+    <header id="HeaderIndex">
+        <nav class="navbar navbar-light navbar-expand-md" style="background-color: #00c2ff;">
+            <div class="container-fluid">
+                <img id="IconHeaderIndex" style="width: 5%;" src="{% static 'img/IconoEmpresa.png' %}">
+                <img id="IconHeaderIndexTexto" style="width: 15%;" src="{% static 'img/IconoEmpresa2.png' %}">
+                <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item" role="presentation"><a class="nav-link active linksIndex" href="{% url 'index' %}">Inicio</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link linksIndex" href="#">Nosotros</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link linksIndex" href="#">Contactanos</a></li>
+                        {% if user.is_anonymous %}
+                        <li class="nav-item d-block d-md-none" role="presentation"><a class="linksIndex" style="color: white;"href="{% url 'login' %}">Iniciar Sesión</a></li>
+                        {% endif %}
+
+                        {% if user.is_authenticated %}
+                        <li class="nav-item d-block d-md-none" role="presentation"><a class="linksIndex" style="color: white;"href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                {% if user.is_anonymous %}   
+                <div class="d-none d-md-block" style="height: auto; width: 10%;"><a style="color: white;"href="{% url 'login' %}"><img style="height: auto; width: 100%;" src="{% static 'img/Elementos/btnLogin.PNG' %}" alt="btnLogin"></a></div>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                <div class="d-none d-md-block" style="text-align: end;">
+                    <div class="container-fluid"><img style="height: auto; width: 10%;" src="{% static 'img/Elementos/logingicon.png' %}"></div>
+                    <div><a  style="color: white;"href="#">Usuario: {{ user.username }}</a></div>
+                    <div><a href="{% url 'logout' %}">Cerrar Sesión</a></div>
+                </div>
+                {% endif %}
+            </div>
+        </nav>
+        <div><img class="col1" src="{% static 'img/FondoHeader2.png' %}" width="100%" height="auto"></div>
+    </header>
+
+    <!-- <div class="col-md-5 col-lg-4">
+        <div class="clean-pricing-item">
+            <div class="heading">
+                <h3>Flexibilidad Horaria</h3>
+            </div>
+            <img alt="Flexibilidad Horaria" class="img-fluid icono_cont" src="{% static 'img/Elementos/Flexibilidad-horaria.png' %}" style="margin-left: 82px; " width="30%">
+            <p style="color: black; margin-bottom: 40px; font-size: 14px;">El alumno estudia en los días y horarios que le conviene, accediendo libremente las 24 horas todos los días del año.<br><br></p>
+     </div>
+    </div> -->
+
+    <div class="d-none d-md-block clearfix" style="padding: 3%;">
+        <div class="columnA">
+            <h3 style="font-size:2em;font-family: system-ui;"> Lorem ipsum</h3>
+            <p style="font-size: 1.5em;">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+                Aut, sit? Enim quidem, ex repellat est tempore accusantium nisi voluptas aperiam provident odio laudantium perspiciatis, 
+                doloremque voluptatibus beatae saepe labore consequuntur!
+            </p>
+            <h3 style="font-size:2em;font-family: system-ui;text-align: right;"> Lorem ipsum</h3>
+            <p style="font-size: 1.5em;">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+                Aut, sit? Enim quidem, ex repellat est tempore accusantium nisi voluptas aperiam provident odio laudantium perspiciatis, 
+                doloremque voluptatibus beatae saepe labore consequuntur!
+            </p>
+        </div>
+        <div class="columnA">
+            <img src="{% static 'img/Elementos/MapaViaje.jpg' %}" alt="Mapa Viaje" style="width: 80%; height: auto; float: right;">
+        </div>
+
+    </div>
+
+    <div class="text-center"><h3 style="font-family: cursive; font-size:250%;"> Explora nuestros selectos departamentos en ubicaciones preferenciales </h3></div>
+    <hr style="margin-left: 10%; margin-right: 10%;">
+
+
+    <section id="gallery" style="margin-top: 10px;">
+        <div class="container">
+          <div class="row">
+
+         {% for p in departamentos %} 
+          <div class="col-lg-4 mb-4">
+          <div class="card">
+            <img src="static/img/Departamentos/{{p.0}}.jpg" alt="Departamento" class="card-img-top" style="height: 250px !important;">
+            <div class="card-body">
+              <h5 class="card-title">Departamento ubicado en {{p.6}} </h5>
+              <h6 class="card-text text-center"> Detalles departamento</h6>
+              <p class="card-text">
+                <strong> Precio por dia:</strong> {{p.2}}<br>
+                <strong>direccion:</strong> {{p.1}}<br>
+                <strong>Cantidad de habitaciones:</strong> {{p.3}}<br>
+                <strong>descripcion:</strong> {{p.4}}<br>
+                <strong>Estado departamento:</strong> {{p.5}}
+              </p>
+             <a href="/departamento{{p.0}}" class="btn btn-outline-success btn-sm">Ver más</a>-->
+              <!-- <a href="" class="btn btn-outline-danger btn-sm"><svg class="svg-inline--fa fa-heart fa-w-16" aria-hidden="true" focusable="false" data-prefix="far" data-icon="heart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M458.4 64.3C400.6 15.7 311.3 23 256 79.3 200.7 23 111.4 15.6 53.6 64.3-21.6 127.6-10.6 230.8 43 285.5l175.4 178.7c10 10.2 23.4 15.9 37.6 15.9 14.3 0 27.6-5.6 37.6-15.8L469 285.6c53.5-54.7 64.7-157.9-10.6-221.3zm-23.6 187.5L259.4 430.5c-2.4 2.4-4.4 2.4-6.8 0L77.2 251.8c-36.5-37.2-43.9-107.6 7.3-150.7 38.9-32.7 98.9-27.8 136.5 10.5l35 35.7 35-35.7c37.8-38.5 97.8-43.2 136.5-10.6 51.1 43.1 43.5 113.9 7.3 150.8z"></path></svg><i class="far fa-heart"></i></a> -->
+            </div>
+           </div>
+          </div>
+          {% endfor %}
+        </div>
+        </div>
+      </section>
+
+    <!-- <div class="container">
+        <div class="row">
+            {% for p in departamentos %}
+
+            <div class="col-sm">
+                <a href="/departamento{{p.0}}"><img height="250px" width="250px" style=" border-radius: 3px; box-shadow: 3px 3px 3px 0px #a9b4bb;" src="static/img/Departamentos/{{p.0}}.jpg" alt="Foto de departamento"></a>
+                <p>Precio: {{p.3}}<br>direccion: {{p.1}}<br>descripcion: {{p.6}}</p>
+                
+            </div>  
+            <div style="width:50px;"></div>            
+            {% endfor %}
+        </div>
+    </div> -->
+
+<!-- Footer -->
+<footer class="page-footer font-small unique-color-dark pt-4">
+
+    <!-- Footer Elements -->
+    {% if user.is_anonymous %}   
+    <div class="container">
+  
+      <!-- Call to action -->
+      <ul class="list-unstyled list-inline text-center py-2">
+        <li class="list-inline-item">
+          <h5 class="mb-1">Registrate Gratis!</h5>
+        </li>
+        <li class="list-inline-item">
+          <a href="{% url 'login' %}" class="btn btn-outline-white btn-rounded" style="color: #00c2ff;font-family: cursive;font-weight: 500;font-size: 1.5em;">¡Registrarse!</a>
+        </li>
+      </ul>
+      <!-- Call to action -->
+  
+    </div>
+    {% endif%}
+    <!-- Footer Elements -->
+  
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+      <a href="https://TurismoReal.com/"> TurismoReal.com</a>
+    </div>
+    <!-- Copyright -->
+  
+  </footer>
+  <!-- Footer -->
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>

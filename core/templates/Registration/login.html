@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Turismo Real - Login</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Brands.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    <header id="HeaderIndex">
+        <nav class="navbar navbar-light navbar-expand-md" style="background-color: #00c2ff;">
+            <div class="container-fluid">
+                <img id="IconHeaderIndex" style="width: 5%;" src="{% static 'img/IconoEmpresa.png' %}">
+                <img id="IconHeaderIndexTexto" style="width: 15%;" src="{% static 'img/IconoEmpresa2.png' %}">
+                <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item" role="presentation"><a class="nav-link active linksIndex" href="{% url 'index' %}">Inicio</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link linksIndex" href="#">Nosotros</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link linksIndex" href="#">Contactanos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <br>
+    <!-- VISTA PC-->
+    <div class="d-none d-md-block" style=" margin-left:auto; margin-right: auto; width: 40%;">
+        
+        <h2 style=" text-align: center;">Inicion Sesión <br> Turismo Real</h2>
+        <br>
+        <form style="width: 100%; text-align: center;" action="" method="POST">
+            {% csrf_token %}
+            <table style="width: 70%;">
+        
+                {{ form.as_table }}
+           
+            </table>
+            <br>
+            
+            <input style="margin-left: auto; margin-right: auto; width: 60%;" type="submit" value="Iniciar Sesión">
+        </form>
+        <br>
+        <p>¿No tienes una cuenta? <a href="{% url 'registro_usuario' %}"> registrate </a> ahora!</p>
+    </div>
+    <!-- VISTA MOVIL-->
+    <div class="nav-item d-block d-md-none" style="width: 100%;">
+        
+        <h2 style=" text-align: center;">Inicion Sesión <br> Turismo Real</h2>
+        <br>
+        <form style="width: 100%; text-align: center;" action="" method="POST">
+            {% csrf_token %}
+            <table style="width: 70%;">
+        
+                {{ form.as_table }}
+           
+            </table>
+            <br>
+            
+            <input style="margin-left: auto; margin-right: auto; width: 60%;" type="submit" value="Iniciar Sesión">
+        </form>
+        <br>
+        <p>¿No tienes una cuenta? <a href="{% url 'registro_usuario' %}"> registrate </a> ahora!</p>
+    </div>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>
